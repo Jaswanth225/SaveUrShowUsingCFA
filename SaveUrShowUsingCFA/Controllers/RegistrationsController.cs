@@ -42,16 +42,17 @@ namespace SaveUrShowUsingCFA.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Registration>> GetRegistration(int id)
         {
-            var registration = await _context.Registration.FindAsync(id);
-
-            if (registration == null)
+            try
             {
+                return await _registrationRepository.GetRegistration(id);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
                 return NotFound();
             }
-
-            return registration;
         }
-
+       
         [HttpGet("{email}/{password}")]
         public async Task<ActionResult<Registration>> GetRegistration(string email, string password)
         {
@@ -110,33 +111,45 @@ namespace SaveUrShowUsingCFA.Controllers
             return NoContent();
         }
 
-        // POST: api/Registrations
+           // POST: api/Registrations
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Registration>> PostRegistration(Registration registration)
         {
-            _context.Registration.Add(registration);
-            await _context.SaveChangesAsync();
+          // _context.Registration.Add(registration);
+          //await _context.SaveChangesAsync();
+            await _registrationRepository.PostRegistration(registration);
 
             return CreatedAtAction("GetRegistration", new { id = registration.userid }, registration);
         }
+
 
         // DELETE: api/Registrations/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Registration>> DeleteRegistration(int id)
         {
-            var registration = await _context.Registration.FindAsync(id);
-            if (registration == null)
+            try
             {
+                return await _registrationRepository.DeleteRegistration(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
                 return NotFound();
             }
+            //var registration = await _context.Registration.FindAsync(id);
+            //if (registration == null)
+            //{
+            //    return NotFound();
+            //}
 
-            _context.Registration.Remove(registration);
-            await _context.SaveChangesAsync();
+            //_context.Registration.Remove(registration);
+            //await _context.SaveChangesAsync();
 
-            return registration;
+            //return registration;
         }
+        
 
         private bool RegistrationExists(int id)
         {
