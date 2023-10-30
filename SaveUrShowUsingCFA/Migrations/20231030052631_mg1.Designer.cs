@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SaveUrShowUsingCFA.models;
 
 namespace SaveUrShowUsingCFA.Migrations
 {
     [DbContext(typeof(SaveUrShowUsingCFADbContext))]
-    partial class SaveUrShowUsingCFADbContextModelSnapshot : ModelSnapshot
+    [Migration("20231030052631_mg1")]
+    partial class mg1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,8 +118,8 @@ namespace SaveUrShowUsingCFA.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("contact")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("contact")
+                        .HasColumnType("int");
 
                     b.Property<string>("email")
                         .IsRequired()

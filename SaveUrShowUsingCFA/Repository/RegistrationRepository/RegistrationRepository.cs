@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SaveUrShowUsingCFA.Controllers;
 using SaveUrShowUsingCFA.models;
+using SaveUrShowUsingCFA.Repository.RegistrationsRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace SaveUrShowUsingCFA.Repository.RegistrationRepository
 {
@@ -22,7 +24,7 @@ namespace SaveUrShowUsingCFA.Repository.RegistrationRepository
         }
         public async Task<ActionResult<IEnumerable<Registration>>> GetRegistration()
         {
-            _logger.LogInformation["Getting all the users successfully."];
+           // _logger.LogInformation["Getting all the users successfully."];
             return await _context.Registration.ToListAsync();
             //throw new NotImplementedException();
         }

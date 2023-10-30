@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SaveUrShowUsingCFA.models;
 using SaveUrShowUsingCFA.Repository.RegistrationRepository;
+using SaveUrShowUsingCFA.Repository.RegistrationsRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +36,13 @@ namespace SaveUrShowUsingCFA
                         builder =>
                         {
                             builder.WithOrigins(
-                                                "http://localhost:4200"
+                                                "http://localhost:51140"
                                                )
                                                .AllowAnyHeader()
                                                .AllowAnyMethod();
                         });
                 });
+           
 
             services.AddControllers();
             services.AddDbContext<SaveUrShowUsingCFADbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
@@ -64,8 +66,13 @@ namespace SaveUrShowUsingCFA
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 
             app.UseRouting();
+            app.UseHttpsRedirection();
 
             app.UseCors("AllowAngularOrigins");
 

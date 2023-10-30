@@ -100,7 +100,18 @@ namespace SaveUrShowUsingCFA.Controllers
 
             return bookTicket;
         }
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<BookTicket>>> GetBookingsByUserId(int userId)
+        {
+            var bookings = await _context.BookTicket.Where(b => b.UserId == userId).ToListAsync();
 
+            if (bookings == null || bookings.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return bookings;
+        }
         private bool BookTicketExists(long id)
         {
             return _context.BookTicket.Any(e => e.Bookid == id);

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SaveUrShowUsingCFA.models;
 using SaveUrShowUsingCFA.Repository.RegistrationRepository;
+using SaveUrShowUsingCFA.Repository.RegistrationsRepository;
 
 namespace SaveUrShowUsingCFA.Controllers
 {
@@ -46,13 +47,13 @@ namespace SaveUrShowUsingCFA.Controllers
             {
                 return await _registrationRepository.GetRegistration(id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 return NotFound();
             }
         }
-       
+
         [HttpGet("{email}/{password}")]
         public async Task<ActionResult<Registration>> GetRegistration(string email, string password)
         {
@@ -111,14 +112,14 @@ namespace SaveUrShowUsingCFA.Controllers
             return NoContent();
         }
 
-           // POST: api/Registrations
+        // POST: api/Registrations
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Registration>> PostRegistration(Registration registration)
         {
-          // _context.Registration.Add(registration);
-          //await _context.SaveChangesAsync();
+            // _context.Registration.Add(registration);
+            //await _context.SaveChangesAsync();
             await _registrationRepository.PostRegistration(registration);
 
             return CreatedAtAction("GetRegistration", new { id = registration.userid }, registration);
@@ -149,7 +150,7 @@ namespace SaveUrShowUsingCFA.Controllers
 
             //return registration;
         }
-        
+
 
         private bool RegistrationExists(int id)
         {
