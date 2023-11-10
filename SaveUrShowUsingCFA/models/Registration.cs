@@ -13,10 +13,12 @@ namespace SaveUrShowUsingCFA.models
         [Required(ErrorMessage = "username is required")]
         [MaxLength(30)]
         [MinLength(5)]
+        
         public string username { get; set; }
         [Required(ErrorMessage = "email is required")]
         [MaxLength(30)]
         [MinLength(5)]
+        [EmailAddress]
         public string email { get; set; }
         [Required(ErrorMessage = "password is required")]
         [MaxLength(30)]
@@ -25,6 +27,9 @@ namespace SaveUrShowUsingCFA.models
         [Required(ErrorMessage = "confirmpassword is requied")]
         [Compare("password", ErrorMessage = "password and confirmation password must match")]
         public string confirmpassword { get; set; }
+        [Phone]
+        [MaxLength(10)]
+        [MinLength(10)]
         public string contact { get; set; }
     }
 }

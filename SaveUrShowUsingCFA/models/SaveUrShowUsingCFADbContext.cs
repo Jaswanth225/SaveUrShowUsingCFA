@@ -16,7 +16,7 @@ namespace SaveUrShowUsingCFA.models
         public virtual DbSet<Registration> Registration { get; set; }
         public virtual DbSet<FindTicket> FindTicket { get; set; }
         public virtual DbSet<BookTicket> BookTicket { get; set; }
-
+        public virtual DbSet<feed> Feed { get; set; }
 
 
     }

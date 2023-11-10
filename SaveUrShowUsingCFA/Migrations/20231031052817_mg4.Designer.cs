@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SaveUrShowUsingCFA.models;
 
 namespace SaveUrShowUsingCFA.Migrations
 {
     [DbContext(typeof(SaveUrShowUsingCFADbContext))]
-    partial class SaveUrShowUsingCFADbContextModelSnapshot : ModelSnapshot
+    [Migration("20231031052817_mg4")]
+    partial class mg4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,8 +119,7 @@ namespace SaveUrShowUsingCFA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("contact")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("email")
                         .IsRequired()
@@ -138,27 +139,6 @@ namespace SaveUrShowUsingCFA.Migrations
                     b.HasKey("userid");
 
                     b.ToTable("Registration");
-                });
-
-            modelBuilder.Entity("SaveUrShowUsingCFA.models.feed", b =>
-                {
-                    b.Property<int>("feedId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("feedId");
-
-                    b.ToTable("Feed");
                 });
 
             modelBuilder.Entity("SaveUrShowUsingCFA.models.BookTicket", b =>
